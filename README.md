@@ -117,7 +117,7 @@ $app->get("/users/manage", function() use ($app) {
 
 ## Working with module
 Module basically is a directory that contain their own `controllers`, `models`, and `view` directories. 
-Module used if you want to distribute tasks with your development team, crew A focused on module User, crew B focused on module Post, etc. And it can also simplify to migrate you part of your application to another application. 
+Module used if you want to distribute tasks with your development team, crew A focused on module User, crew B focused on module Post, etc. And it can also simplify to migrate a part of your slimmy application to another slimmy application. 
 
 > by default modules are located on `app/modules`.
 
