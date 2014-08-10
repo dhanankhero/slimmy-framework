@@ -115,9 +115,6 @@ $app->get("/users/manage", function() use ($app) {
 ```
 > For documentation about twig syntax, you can find it in official site twig [here](http://twig.sensiolabs.org/doc/templates.html)
 
-
-for documentation about twig language, you can find it [here](http://twig.sensiolabs.org/doc/templates.html).
-
 ## More from official documentation
 - Routing: [http://docs.slimframework.com/#Routing-Overview](http://docs.slimframework.com/#Routing-Overview)
 - Rendering a view: [http://docs.slimframework.com/#Rendering](http://docs.slimframework.com/#Rendering)
