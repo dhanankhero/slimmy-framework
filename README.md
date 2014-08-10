@@ -31,6 +31,7 @@ Controller is a Class that grouping some actions/methods in your application, wh
 For example, you want to create some actions to manage user
 ```php
 <?php
+// app/controllers/UserController.php
 
 class UserController extends BaseController {
 
@@ -65,6 +66,7 @@ Models are PHP classes that are designed to simplify interact with your table in
 For example, you have `users` table on your database, so the User model file might look like this: 
 ```php
 <?php 
+// app/models/User.php
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -79,8 +81,11 @@ class User extends Model {
 ### View
 View basically is a file that contain HTML, css or js code that rendered to browser as web page. View files by default is located on `app/views` directory. This framework use twig as View, so you should use `.twig` as extension.
 
-Rendering a view
+Rendering a view in controller
 ```php
+<?php
+// app/controllers/UserController.php
+
 // example rendering 'app/views/manage-users.twig' via controller
 class UserController extends BaseController {
 
@@ -92,6 +97,11 @@ class UserController extends BaseController {
     }
 
 }
+```
+
+Rendering a view by Closure in Route
+```php
+// public/index.php
 
 // example rendering 'app/views/manage-users.twig' via Route Closure
 $app->get("/users/manage", function() use ($app) {
@@ -108,15 +118,9 @@ $app->get("/users/manage", function() use ($app) {
 
 for documentation about twig language, you can find it [here](http://twig.sensiolabs.org/doc/templates.html).
 
-
-
-
-
-## Looking for Documentation?
-At this time, i have not write documentations. But, actually this framework is just a Slim framework that combining with some great features from another popular framework as i said in the description. So, for these documentation you can find at:
+## More from official documentation
 - Routing: [http://docs.slimframework.com/#Routing-Overview](http://docs.slimframework.com/#Routing-Overview)
 - Rendering a view: [http://docs.slimframework.com/#Rendering](http://docs.slimframework.com/#Rendering)
 - Twig for view: [http://twig.sensiolabs.org/](http://twig.sensiolabs.org/)
 - Eloquent Model: [http://laravel.com/docs/eloquent](http://laravel.com/docs/eloquent)
 - Validation: [http://laravel.com/docs/validation](http://laravel.com/docs/validation)
-- For working with MVC or HMVC, you can learn from Hello Module.
