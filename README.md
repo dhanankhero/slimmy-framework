@@ -26,7 +26,7 @@ After finish installation, open `localhost/yourprojectdirname/public` in your br
 ## Guides
 
 ### Controller
-Controller is a Class that grouping some actions/methods in your application, where these actions/methods can be called via Route. Controller files located in `app/controllers`.
+Controller is a Class that grouping some actions/methods in your application, and these actions/methods can be called via Route. Controller files located in `app/controllers`.
 
 For example, you want to create some actions to manage user
 ```php
@@ -36,12 +36,12 @@ For example, you want to create some actions to manage user
 class UserController extends BaseController {
 
     public function pageManageUsers() {
-        // some actions to create page manage users
+        // some statements to create page manage users
     }
     
     public function addUser()
     {
-        // some actions to add new user
+        // some statements to add new user
     }
     
 }
