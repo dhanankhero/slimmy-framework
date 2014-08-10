@@ -23,7 +23,7 @@ First, make sure you have [composer](https://getcomposer.org) installed on your 
 
 After finish installation, open `localhost/yourprojectdirname/public` in your browser.
 
-## Guides
+## Basic Guides
 
 ### Controller
 Controller is a Class that grouping some actions/methods in your application, and these actions/methods can be called via Route. Controller files located in `app/controllers`.
@@ -79,7 +79,7 @@ class User extends Model {
 > this framework using Eloquent laravel for Model, so you can read full documentation about using Eloquent [here](http://laravel.com/docs/eloquent)
 
 ### View
-View basically is a file that contain HTML, css or js code that rendered to browser as web page. View files by default is located on `app/views` directory. This framework use twig as View, so you should use `.twig` as extension.
+View basically is a file that contain HTML, css or js code that rendered to browser as a web page. View files by default is located on `app/views` directory. This framework use twig as View, so you should use `.twig` as extension.
 
 Rendering a view in controller
 ```php
