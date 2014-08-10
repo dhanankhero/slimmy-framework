@@ -115,6 +115,36 @@ $app->get("/users/manage", function() use ($app) {
 ```
 > For documentation about twig syntax, you can find it in official site twig [here](http://twig.sensiolabs.org/doc/templates.html)
 
+## Working with module
+Module basically is a directory that contain their own `controllers`, `models`, and `view` directories. 
+Module used if you want to distribute tasks with your development team, crew A focused on module User, crew B focused on module Post, etc. And it can also simplify to migrate you part of your application to another application. 
+
+> by default modules are located on `app/modules`.
+
+### Module Directory Structure
+Basically, module structure might look like this
+```
+yourmodule
+    |- controllers
+    |   |- YourModuleController.php
+    |
+    |- models
+    |   |- YourModuleModel.php
+    |
+    |- views
+    |   |- your-module-view.twig
+    |
+    |- migrators
+    |   |- YourModuleMigrator.php
+```
+
+### Call Module Controller action/method from Route
+```
+// public/index.php
+
+$app->get("/your-route", "@YourModuleName/YourModuleController:methodName");
+```
+
 ## More from official documentation
 - Routing: [http://docs.slimframework.com/#Routing-Overview](http://docs.slimframework.com/#Routing-Overview)
 - Rendering a view: [http://docs.slimframework.com/#Rendering](http://docs.slimframework.com/#Rendering)
