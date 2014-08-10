@@ -1,0 +1,16 @@
+{
+    "name": "slimmy/framework",
+    "require": {
+        "php": ">=5.3.10",
+        "rakit/slimmy": "0.*",
+        "illuminate/validation": "4.1.*",
+        "itsgoingd/slim-facades": "1.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-0": {
+            "": ["app/models", "app/controllers", "app/libraries"],
+            "App": ""
+        }
+    }
+}
