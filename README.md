@@ -19,7 +19,7 @@ First, make sure you have [composer](https://getcomposer.org) installed on your 
 - go to your based project directory(eg: htdocs in XAMPP, or www in WAMP) 
 - run composer command below:
 
-    `composer create-project rakit/slimmy-framework yourprojectdirname --prefer-dist`
+    `composer create-project slimmy/framework yourprojectdirname --prefer-dist`
 
 After finish installation, open `localhost/yourprojectdirname/public` in your browser.
 
