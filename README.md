@@ -23,7 +23,96 @@ First, make sure you have [composer](https://getcomposer.org) installed on your 
 
 After finish installation, open `localhost/yourprojectdirname/public` in your browser.
 
-## Documentation?
+## Guides
+
+### Controller
+Controller is a Class that grouping some actions/methods in your application, where these actions/methods can be called via Route. Controller files located in `app/controllers`.
+
+For example, you want to create some actions to manage user
+```php
+<?php
+
+class UserController extends BaseController {
+
+    public function pageManageUsers() {
+        // some actions to create page manage users
+    }
+    
+    public function addUser()
+    {
+        // some actions to add new user
+    }
+    
+}
+```
+
+And you can call these actions in your route file by:
+```php
+// public/index.php
+
+// call action UserController->pageManageUser 
+// when user landing on [site]/index.php/user/manage
+$app->get("/user/manage", "UserController:pageManageUsers");
+
+// call action UserController->addUser 
+// when user post something to [site]/index.php/user/manage
+$app->post("/user/add", "UserController:addUser");
+```
+
+### Model
+Models are PHP classes that are designed to simplify interact with your table in your database. Model files located in `app/models` directory. To make your model work, you must create at least one database connections on your `app/configs/database.php` file. 
+
+For example, you have `users` table on your database, so the User model file might look like this: 
+```php
+<?php 
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model {
+
+    protected $table = 'users';
+
+}
+``` 
+> this framework using Eloquent laravel for Model, so you can read full documentation about using Eloquent [here](http://laravel.com/docs/eloquent)
+
+### View
+View basically is a file that contain HTML, css or js code that rendered to browser as web page. View files by default is located on `app/views` directory. This framework use twig as View, so you should use `.twig` as extension.
+
+Rendering a view
+```php
+// example rendering 'app/views/manage-users.twig' via controller
+class UserController extends BaseController {
+
+    public function pageManageUsers() {
+        $data = array(
+            // variables you want to creates in view
+        );
+        $this->app->render("manage-users.twig", $data);
+    }
+
+}
+
+// example rendering 'app/views/manage-users.twig' via Route Closure
+$app->get("/users/manage", function() use ($app) {
+    $data = array(
+        // variables you want to creates in view
+    );
+    $app->render("manage-users.twig", $data);
+
+});
+
+```
+> For documentation about twig syntax, you can find it in official site twig [here](http://twig.sensiolabs.org/doc/templates.html)
+
+
+for documentation about twig language, you can find it [here](http://twig.sensiolabs.org/doc/templates.html).
+
+
+
+
+
+## Looking for Documentation?
 At this time, i have not write documentations. But, actually this framework is just a Slim framework that combining with some great features from another popular framework as i said in the description. So, for these documentation you can find at:
 - Routing: [http://docs.slimframework.com/#Routing-Overview](http://docs.slimframework.com/#Routing-Overview)
 - Rendering a view: [http://docs.slimframework.com/#Rendering](http://docs.slimframework.com/#Rendering)
