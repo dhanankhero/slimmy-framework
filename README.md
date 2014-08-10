@@ -56,7 +56,7 @@ And you can call these actions in your route file by:
 $app->get("/user/manage", "UserController:pageManageUsers");
 
 // call action UserController->addUser 
-// when user post something to [site]/index.php/user/manage
+// when user post something to [site]/index.php/user/add
 $app->post("/user/add", "UserController:addUser");
 ```
 
