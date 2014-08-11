@@ -6,7 +6,7 @@ Mini (H)MVC framework based on [Slim micro framework](http://www.slimframework.c
 
 It is just instant way to create Slim project with simple (H)MVC architecture.
 
-[README Indonesian version](https://github.com/emsifa/slimmy-framework/blob/master/README-id.md)
+> Indonesian? [nih README versi Indonesianya](https://github.com/emsifa/slimmy-framework/blob/master/README-id.md)
 
 ## Features
 - **powerful** Eloquent ORM for Models.
