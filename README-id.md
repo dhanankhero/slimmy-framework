@@ -225,7 +225,7 @@ yourmodule
 ```
 
 ### Memanggil Aksi di Controller yang terdapat pada Module
-Slimmy menggunakan [PSR-0](http://www.php-fig.org/psr/psr-0/) sebagai autoloader modulenya, jadi Controller didalam module memiliki namespacenya sendiri(defaultnya `App\Modules\[nama_module]\Controllers`). Jadi untuk mengakses aksi
+Slimmy menggunakan [autoload PSR-0 composer](https://getcomposer.org/doc/04-schema.md#psr-0) sebagai autoloader modulenya, jadi Controller didalam module memiliki namespacenya sendiri(defaultnya `App\Modules\[nama_module]\Controllers`). Jadi untuk mengakses aksi
 pada Controller tersebut, kamu harus menambahkan @[nama_module] sebagai shortcut namespacingnya.
 
 Contoh
