@@ -54,7 +54,10 @@ memanfaatkan middleware seperti dibawah ini:
 
 ```php
 function check_login() {
- // cek session. Jika belum login, kamu dapat menghentikan aplikasi agar user tidak dapat melakukan [action]
+ // cek session. Jika user belum login, 
+ // kamu dapat menghentikan aplikasi 
+ // atau kamu dapat melemparnya ke Error 403 (Forbidden Access)
+ // agar user tidak dapat melakukan [action]
 }
 
 $app->get('/admin', 'check_login', 'AdminController:pageIndex');
