@@ -35,6 +35,34 @@ Setelah composer selesai menginstall dependency, buka `localhost/yourprojectdirn
 
 ## Petunjuk Dasar
 
+### Route
+Route, seperti artinya dia adalah `rute`. Route berfungsi untuk mengatur **apa saja sih** `rute` yang terdapat dalam aplikasi yang akan kamu buat, dan apa metode untuk mengakses masing-masing `rute` tersebut. Untuk itu routing(menjabarkan/mendaftarkan routes) adalah salah 1 yang harus kamu kerjakan pada tahap awal pembuatan aplikasi kamu. 
+
+#### Basic Route
+Untuk mendaftarkan sebuah `rute`, format dasarnya adalah seperti ini
+
+`$app->[http_method]([route], [callable])`
+
+**[http_method]**: metode untuk mengakses `rute` tersebut, ada beberapa http request method yang perlu kamu ketahui, seperti `get`, `post`, `put`, `patch`, `delete`, `head`. Seperti yang kamu ketahui, dari beberapa http method tersebut, yang paling sering terpakai adalah `get`, dan `post`. Sementara yang lainnya biasa dipakai untuk membuat RESTful service.
+
+**[route]**: path dari `rute` tersebut, dalam Slim, path harus diawali dengan '/'. Untuk itu path '/' adalah index aplikasi kamu.
+
+**callable**: callable disini bisa berupa Closure(function), string untuk mengakses aksi ke Controller, ataupun string nama function.
+
+Contoh mendaftarkan route
+```php
+// public/index.php
+
+// 1) mendaftarkan rute index, cukup dengan '/'
+$app->get("/", "YourController:pageIndex");
+
+// 2) mendaftarkan rute form add-user
+$app->get("/user/add", "UserController:pageFormAddUser");
+
+// 3) mendaftarkan rute submit add user
+$app->post("/user/add", "UserController:addUser");
+```
+
 ### Controller
 Controller adalah sebuah Class yang menyimpan aksi-aksi dari aplikasi kamu, 
 dan aksi tersebut dapat dipanggil melalui sebuah Route. File controller terletak di `app/controllers`.
