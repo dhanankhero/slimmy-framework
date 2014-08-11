@@ -54,7 +54,7 @@ class UserController extends BaseController {
 }
 ```
 
-Setelah itu, anda dapat menjalankan aksi tersebut melalui Route seperti dibawah ini
+Setelah itu, kamu dapat menjalankan aksi tersebut melalui Route seperti dibawah ini
 ```php
 // public/index.php
 
