@@ -36,8 +36,8 @@ Setelah composer selesai menginstall dependency, buka `localhost/yourprojectdirn
 ## Petunjuk Dasar
 
 ### Controller
-Controller adalah sebuah Class yang menyimpan aksi-aksi dari aplikasi anda, 
-dimana aksi tersebut dapat dipanggil melalui sebuah Route. File controller terletak di `app/controllers`.
+Controller adalah sebuah Class yang menyimpan aksi-aksi dari aplikasi kamu, 
+dan aksi tersebut dapat dipanggil melalui sebuah Route. File controller terletak di `app/controllers`.
 
 Contoh, jika kamu mau membuat beberapa aksi untuk me-manage user
 ```php
