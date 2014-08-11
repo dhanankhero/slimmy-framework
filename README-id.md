@@ -122,7 +122,7 @@ $app->post("/user/add", "UserController:addUser");
 ### Model
 Model pada dasarnya adalah sebuah Class yang dirancang khusus untuk berinteraksi dengan table di database kamu.
 File model terletak di direktori `app/models`. Sebelumnya, untuk membuat file model kamu berjalan dengan baik, kamu harus
-membuat setidaknya sebuah koneksi database di `app/config/database.php`.
+membuat setidaknya sebuah koneksi database di `app/configs/database.php`.
 
 Misalnya, kamu punya table `users` di database, maka User modelnya akan seperti ini: 
 ```php
@@ -136,7 +136,30 @@ class User extends Model {
     protected $table = 'users';
 
 }
-``` 
+```
+Setelah itu, kamu dapat dengan mudah melakukan CRUD pada table `users` tersebut. 
+Dibawah ini adalah contoh dasar operasi CRUD dalam Eloquent ORM:
+```php
+// membuat User baru
+$user = new User;
+$user->username = "johndoe";
+$user->email = "johndoe@mail.com";
+$user->save();
+
+// mengambil data User berdasarkan id
+$user = User::find(1); // 1 = id user yang dicari
+
+// mengupdate data user dengan id = 1
+$user = User::find(1);
+$user->email = "newmail@mail.com";
+$user->save();
+
+// menghapus data user dengan id = 1
+$user = User::find(1);
+$user->delete();
+```
+
+
 > framework ini menggunakan Eloquent Modelnya Laravel sebagai Model, jadi untuk dokumentasi selengkapnya tentang Eloquent, kamu bisa temukan [disini](http://laravel.com/docs/eloquent)
 
 ### View
