@@ -10,7 +10,7 @@ dan [Twig template engine](http://twig.sensiolabs.org/ "Twig Template Engine") s
 Slimmy framework dibuat untuk mempermudah membuat Slim project dengan simpel arsitektur (H)MVC. 
 
 > FYI: Slimmy ini anaknya dari Slim(inheritance Slim\Slim), jadi penggunaannya sama persis dengan Slim framework.
-Framework ini hanya mengintegrasikan Illuminate/datase, Illuminate/Validation dan Twig kedalam simpel (H)MVC arsitekturnya.
+Framework ini hanya mengintegrasikan Illuminate/database, Illuminate/Validation, dan Twig kedalam simpel (H)MVC arsitekturnya.
 
 ## Fitur
 Untuk fitur, karena Slimmy ini sebuah mini framework. 
@@ -20,7 +20,7 @@ Jadi hanya mengutamakan beberapa fitur untuk mendukung arsitektur (H)MVCnya, dia
 - **simple** Modular System.
 - **great** Laravel Validator.
 
-> Tapi, hei.. slimmy ini based on composer. Jadi kamu bisa install package(library) apapun yang kamu butuhkan dari ribuan package yang tersedia di packagist!
+> Tapi, hei.. slimmy ini based on composer. Jadi kamu bisa install package(library) apapun yang kamu butuhkan dari ribuan package yang tersedia di packagist! dan jangan ragu untuk mengubah atau membuat sendiri file bootstrap(`app/app.php`) kamu.
 
 ## Instalasi
 Pertama-tama, pastikan kamu sudah menginstal [composer](https://getcomposer.org) di komputer kamu. 
@@ -57,9 +57,10 @@ function check_login() {
  // cek session. Jika user belum login, 
  // kamu dapat menghentikan aplikasi 
  // atau kamu dapat melemparnya ke Error 403 (Forbidden Access)
- // agar user tidak dapat melakukan [action]
 }
 
+// saat mengakses [site]/admin, route akan menjalankan fungsi check_login 
+// sebelum memanggil aksi AdminController:pageIndex
 $app->get('/admin', 'check_login', 'AdminController:pageIndex');
 ```
 
@@ -103,7 +104,7 @@ class UserController extends BaseController {
     
 }
 ```
-> **Note & Tips**: setiap aksi di dalam Controller, harus memiliki visibility public (public function) agar dapat dipanggil melalui Route. Jadi kalau mau buat function dimana function tersebut tidak untuk dipanggil melalui Route, buat dalam visibility private atau protected.
+> **Note & Tips**: setiap aksi di dalam Controller, harus memiliki visibility public (public function) agar dapat dipanggil melalui Route. Jadi kalau mau buat function dimana function tersebut tidak untuk dipanggil melalui Route(hanya untuk dipanggil di Class itu sendiri untuk mematangkan prinsip [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself)), buat dalam visibility private atau protected.
 
 Setelah itu, kamu dapat menjalankan aksi tersebut melalui Route seperti dibawah ini
 ```php
