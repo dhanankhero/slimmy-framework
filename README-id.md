@@ -20,7 +20,7 @@ Framework ini hanya mengintegrasikan Illuminate/datase, Illuminate/Validation da
 
 ## Instalasi
 Pertama-tama, pastikan kamu sudah menginstal [composer](https://getcomposer.org) di komputer kamu. 
- Setelah itu, ikutin langkah di bawah ini:
+ Setelah itu, ikuti langkah di bawah ini:
 - buka terminal atau cmd(untuk pengguna Windows)
 - masuk ke direktori dimana kamu mau menempatkan project kamu.
 - ketik perintah composer dibawah ini:
