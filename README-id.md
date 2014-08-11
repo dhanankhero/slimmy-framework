@@ -41,13 +41,13 @@ Route, seperti artinya dia adalah `rute`. Route berfungsi untuk mengatur **apa s
 #### Basic Route
 Untuk mendaftarkan sebuah `rute`, format dasarnya adalah seperti ini
 
-`$app->[http_method]([route], [callable])`
+`$app->[request_method]([route], [callable]);`
 
-**[http_method]**: metode untuk mengakses `rute` tersebut, ada beberapa http request method yang perlu kamu ketahui, seperti `get`, `post`, `put`, `patch`, `delete`, `head`. Seperti yang kamu ketahui, dari beberapa http method tersebut, yang paling sering terpakai adalah `get`, dan `post`. Sementara yang lainnya biasa dipakai untuk membuat RESTful service.
+**[request_method]**: metode untuk mengakses `rute` tersebut, ada beberapa request method yang perlu kamu ketahui di dalam HTTP, yaitu `get`, `post`, `put`, `patch`, `delete`, `head`. Dari beberapa http method tersebut, yang paling sering terpakai adalah `get`, dan `post`. Sementara yang lainnya biasa dipakai untuk membuat RESTful service.
 
 **[route]**: path dari `rute` tersebut, dalam Slim, path harus diawali dengan '/'. Untuk itu path '/' adalah index aplikasi kamu.
 
-**callable**: callable disini bisa berupa Closure(function), string untuk mengakses aksi ke Controller, ataupun string nama function.
+**[callable]**: callable disini bisa berupa Closure(function), string untuk mengakses aksi ke Controller, ataupun string nama function.
 
 Contoh mendaftarkan route
 ```php
