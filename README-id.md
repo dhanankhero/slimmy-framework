@@ -16,7 +16,7 @@ Slimmy framework dibuat untuk mempermudah membuat Slim project dengan simpel ars
 - **great** Laravel Validator.
 
 ## Instalasi
-Pertama-tama, pastikan anda sudah menginstal [composer](https://getcomposer.org) di komputer anda. 
+Pertama-tama, pastikan kamu sudah menginstal [composer](https://getcomposer.org) di komputer kamu. 
  Setelah itu, ikutin langkah di bawah ini:
 - buka terminal atau cmd(untuk pengguna Windows)
 - masuk ke direktori dimana kamu mau menempatkan project kamu.
@@ -24,7 +24,7 @@ Pertama-tama, pastikan anda sudah menginstal [composer](https://getcomposer.org)
 
     `composer create-project slimmy/framework yourprojectdirname --prefer-dist`
 
-Setelah composer selesai menginstall dependency, buka `localhost/yourprojectdirname/public` di browser anda.
+Setelah composer selesai menginstall dependency, buka `localhost/yourprojectdirname/public` di browser kamu.
 
 ## Petunjuk Dasar
 
@@ -85,9 +85,11 @@ class User extends Model {
 > framework ini menggunakan Eloquent Modelnya Laravel sebagai Model, jadi untuk dokumentasi selengkapnya tentang Eloquent, kamu bisa temukan [disini](http://laravel.com/docs/eloquent)
 
 ### View
-View basically is a file that contain HTML, css or js code that rendered to browser as a web page. View files by default is located on `app/views` directory. This framework use twig as View, so you should use `.twig` as extension.
+View adalah sebuah file yang dikhususkan untuk hanya berisi kode-kode HTML, css atau js, dimana dia nantinya akan
+di render ke browser sebagai sebuah halaman web. File view defaultnya berada di direktori `app/views`. Framework
+ini menggunakan Twig sebagai template engine viewnya, jadi ektensi file view kamu harus `.twig`.
 
-Rendering a view in controller
+Merender sebuah view melalui controller
 ```php
 <?php
 // app/controllers/UserController.php
@@ -105,7 +107,7 @@ class UserController extends BaseController {
 }
 ```
 
-Rendering a view by Closure in Route
+Merender sebuah view melalui Closure(function) di Route
 ```php
 // public/index.php
 
@@ -117,18 +119,18 @@ $app->get("/users/manage", function() use ($app) {
     $app->render("manage-users.twig", $data);
 
 });
-
 ```
-> For documentation about twig syntax, you can find it in twig official site [here](http://twig.sensiolabs.org/doc/templates.html)
+> Untuk dokumentasi penggunaan twig, kamu dapat langsung lihat di official site twig [disini](http://twig.sensiolabs.org/doc/templates.html)
 
 ## Working with module
-Module basically is a directory that contain their own `controllers`, `models`, and `views` files. 
-Module used if you want to distribute tasks with your development team, crew A focused on module User, crew B focused on module Post, etc. And it can also simplify to migrate a part of your slimmy application to another slimmy application. 
+Module adalah sebuah direktori yang memiliki file `controllers`, `models`, dan `views`nya sendiri. 
+Module digunakan jika kamu ingin berkolaborasi dengan tim pengembangan kamu, misalnya si A fokus mengerjakan bagian `User`, si B fokus mengerjakan bagian `Post`, dsb. Dan dia juga berguna untuk mempermudah dalam memindahkan bagian
+aplikasi dari aplikasi slimmy yang 1 ke aplikasi slimmy yang lain.
 
-> by default modules are located on `app/modules`.
+> pada dasarnya, module terletak di `app/modules`.
 
-### Module Directory Structure
-Basically, module structure might look like this
+### Struktur Direktori Module
+Struktur direktori dari sebuah module, pada dasarnya adalah seperti ini
 ```
 yourmodule
     |- controllers
@@ -144,17 +146,17 @@ yourmodule
     |   |- YourModuleMigrator.php
 ```
 
-### Call Module Controller action/method from Route
+### Memanggil Aksi di Controller yang terdapat pada Module
 ```php
 // public/index.php
 
 $app->get("/your-route", "@YourModuleName/YourModuleController:methodName");
 ```
 
-### Rendering Module View
-Rendering module view is little bit different, because view in the module have it's own [namespace](http://twig.sensiolabs.org/doc/api.html#built-in-loaders). So, you should call these views in format `@[ModuleName]/[viewpath/viewname.twig]`. 
+### Merender View yang terdapat pada Module
+Merender sebuah view di dalam module agak sedikit berbeda, karena view di dalam sebuah module juga memiliki [namespace](http://twig.sensiolabs.org/doc/api.html#built-in-loaders)nya sendiri. Format pemanggilan view di dalam module akan seperti ini `@[ModuleName]/[viewpath/viewname.twig]`. 
 
-For example, if you want render `form-edit-user.twig` in `User` module.
+Contoh, jika kamu ingin merender `form-edit-user.twig` yang berada di dalam module `User`.
 ```php
 $this->app->render("@User/form-edit-user.twig", $data);
 ```
