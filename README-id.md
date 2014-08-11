@@ -161,10 +161,12 @@ $app->get("/your-route", "@YourModuleName/YourModuleController:methodName");
 ```
 
 ### Merender View yang terdapat pada Module
-Merender sebuah view di dalam module agak sedikit berbeda, karena view di dalam sebuah module juga memiliki [namespace](http://twig.sensiolabs.org/doc/api.html#built-in-loaders)nya sendiri. Format pemanggilan view di dalam module akan seperti ini `@[ModuleName]/[viewpath/viewname.twig]`. 
+Merender sebuah view di dalam module agak sedikit berbeda, karena view di dalam sebuah module juga memiliki [namespacenya](http://twig.sensiolabs.org/doc/api.html#built-in-loaders) sendiri. Format pemanggilan view di dalam module akan seperti ini `@[ModuleName]/[viewpath/viewname.twig]`. 
 
 Contoh, jika kamu ingin merender `form-edit-user.twig` yang berada di dalam module `User`.
 ```php
+
+// render app/modules/User/views/form-edit-user.twig
 $this->app->render("@User/form-edit-user.twig", $data);
 ```
 
