@@ -139,10 +139,18 @@ yourmodule
 ```
 
 ### Call Module Controller action/method from Route
-```
+```php
 // public/index.php
 
 $app->get("/your-route", "@YourModuleName/YourModuleController:methodName");
+```
+
+### Rendering Module View
+Rendering module view is little bit different, because view in the module have it's own [namespace](http://twig.sensiolabs.org/doc/api.html#built-in-loaders). So, you should call these views in format `@[ModuleName]/[viewpath/viewname.twig]`. 
+
+For example, if you want render `form-edit-user.twig` in `User` module.
+```php
+$this->app->render("@User/form-edit-user.twig", $data);
 ```
 
 ## More from official documentation
