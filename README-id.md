@@ -48,7 +48,7 @@ Untuk mendaftarkan sebuah `rute`, format dasarnya adalah seperti ini
 
 **[middleware]** (optional) : adalah sebuah callable yang akan dipanggil sebelum [action] dijalankan. 
 Middleware dapat berupa string nama sebuah function, dapat juga berupa variable [anonymous function](http://php.net/manual/en/functions.anonymous.php), dan juga dapat berupa Closure.
-Salah 1 kegunaan Route Middleware dapat digunakan untuk memfilter user apakah [action] boleh dijalankan atau tidak. 
+Salah 1 kegunaan Route Middleware adalah untuk memfilter user apakah [action] boleh dijalankan atau tidak. 
 Contoh, jika pada rute `/admin`, hanya user yang sudah login yang boleh menjalankan [action] rute tersebut, kamu dapat
 memanfaatkan middleware seperti dibawah ini:
 
