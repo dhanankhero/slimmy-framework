@@ -113,7 +113,7 @@ $app->get("/users/manage", function() use ($app) {
 });
 
 ```
-> For documentation about twig syntax, you can find it in official site twig [here](http://twig.sensiolabs.org/doc/templates.html)
+> For documentation about twig syntax, you can find it in twig official site [here](http://twig.sensiolabs.org/doc/templates.html)
 
 ## Working with module
 Module basically is a directory that contain their own `controllers`, `models`, and `views` files. 
