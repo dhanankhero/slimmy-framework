@@ -36,7 +36,7 @@ Setelah composer selesai menginstall dependency, buka `localhost/yourprojectdirn
 ## Petunjuk Dasar
 
 ### Route
-Route, seperti artinya dia adalah `rute`. Route berfungsi untuk mengatur **apa saja sih** `rute` yang terdapat dalam aplikasi yang akan kamu buat, dan apa metode untuk mengakses masing-masing `rute` tersebut. Untuk itu routing(menjabarkan/mendaftarkan routes) adalah salah 1 yang harus kamu kerjakan pada tahap awal pembuatan aplikasi kamu. 
+Route, seperti artinya dia adalah `rute`. Route berfungsi untuk mengatur **apa saja sih** `rute` yang terdapat dalam aplikasi yang akan kamu buat, dan apa metode untuk mengakses masing-masing `rute` tersebut. Untuk itu routing(menjabarkan/mendaftarkan routes) adalah salah 1 hal yang seharusnya kamu kerjakan pada tahap awal pembuatan aplikasi kamu. 
 
 Untuk mendaftarkan sebuah `rute`, format dasarnya adalah seperti ini
 
