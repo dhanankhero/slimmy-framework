@@ -26,7 +26,7 @@ Jadi hanya mengutamakan beberapa fitur untuk mendukung arsitektur (H)MVCnya, dia
 Pertama-tama, pastikan kamu sudah menginstal [composer](https://getcomposer.org) di komputer kamu. 
  Setelah itu, ikuti langkah di bawah ini:
 - buka terminal atau cmd(untuk pengguna Windows)
-- masuk ke direktori dimana kamu mau menempatkan project kamu.
+- masuk ke direktori dimana kamu mau menempatkan direktori project kamu.
 - ketik perintah composer dibawah ini:
 
     `composer create-project slimmy/framework yourprojectdirname --prefer-dist`
