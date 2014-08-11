@@ -2,10 +2,11 @@
 
 slimmy-framework
 ================
-
 Mini (H)MVC framework based on [Slim micro framework](http://www.slimframework.com/ "Slim micro framework") combined with [illuminate/database Laravel](https://github.com/illuminate/database "Illuminate Database") for model and [Twig template engine](http://twig.sensiolabs.org/ "Twig Template Engine") for view.
 
 It is just instant way to create Slim project with simple (H)MVC architecture.
+
+[README Indonesian version](https://github.com/emsifa/slimmy-framework/blob/master/README-id.md)
 
 ## Features
 - **powerful** Eloquent ORM for Models.
