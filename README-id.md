@@ -42,11 +42,11 @@ Untuk mendaftarkan sebuah `rute`, format dasarnya adalah seperti ini
 
 `$app->[request_method]([route], [middleware1, middleware2, [action]]);`
 
-**[request_method]**: adalah metode untuk mengakses `rute` tersebut, ada beberapa request method yang perlu kamu ketahui di dalam HTTP, yaitu `get`, `post`, `put`, `patch`, `delete`, `head`. Dari beberapa http method tersebut, yang paling sering terpakai adalah `get`, dan `post`. Sementara yang lainnya biasa dipakai untuk membuat RESTful service.
+**[request_method]** (required) : adalah metode untuk mengakses `rute` tersebut, ada beberapa request method yang perlu kamu ketahui di dalam HTTP, yaitu `get`, `post`, `put`, `patch`, `delete`, `head`. Dari beberapa http method tersebut, yang paling sering terpakai adalah `get`, dan `post`. Sementara yang lainnya biasa dipakai untuk membuat RESTful service.
 
-**[route]**: adalah path dari `rute` tersebut, dalam Slim, path harus diawali dengan '/'. Untuk itu path '/' adalah index aplikasi kamu.
+**[route]** (required) : adalah path dari `rute` tersebut, dalam Slim, path harus diawali dengan '/'. Untuk itu path '/' adalah index aplikasi kamu.
 
-**[middleware]**: adalah sebuah callable yang akan dipanggil sebelum [action] dijalankan. 
+**[middleware]** (optional) : adalah sebuah callable yang akan dipanggil sebelum [action] dijalankan. 
 Middleware dapat berupa string nama function, dapat juga berupa anonymouse function, dan juga dapat berupa Closure.
 Salah 1 kegunaan Route Middleware dapat digunakan untuk memfilter user apakah [action] boleh dijalankan atau tidak. 
 Contoh, jika pada rute `/admin`, hanya user yang sudah login yang boleh menjalankan [action] rute tersebut, kamu dapat
@@ -60,9 +60,9 @@ function check_login() {
 $app->get('/admin', 'check_login', 'AdminController:pageIndex');
 ```
 
-**[action]**: action disini bisa berupa Closure(function), berupa string untuk mengakses aksi ke Controller, ataupun berupa string nama function.
+**[action]** (required) : action disini bisa berupa Closure(function), berupa string untuk mengakses aksi ke Controller, ataupun berupa string nama function.
 
-Contoh mendaftarkan route
+#### Contoh mendaftarkan route
 ```php
 // public/index.php
 
