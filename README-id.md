@@ -104,7 +104,7 @@ class UserController extends BaseController {
     
 }
 ```
-> **Note & Tips**: setiap aksi di dalam Controller, harus memiliki visibility public (public function) agar dapat dipanggil melalui Route. Jadi kalau mau buat function dimana function tersebut tidak untuk dipanggil melalui Route(hanya untuk dipanggil di Class itu sendiri untuk mematangkan prinsip [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself)), buat dalam visibility private atau protected.
+> **Note & Tips**: setiap aksi di dalam Controller, harus memiliki akses public (public function) agar dapat dipanggil melalui Route. Jadi kalau mau buat function dimana function tersebut tidak untuk dipanggil melalui Route(hanya untuk dipanggil di Class itu sendiri untuk mematangkan prinsip [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself)), buat dalam akses private atau protected.
 
 Setelah itu, kamu dapat menjalankan aksi tersebut melalui Route seperti dibawah ini
 ```php
