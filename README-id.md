@@ -56,12 +56,14 @@ Contoh mendaftarkan route
 // 1) mendaftarkan rute index, cukup dengan '/'
 $app->get("/", "YourController:pageIndex");
 
-// 2) mendaftarkan rute form add-user
+// 2) mendaftarkan rute untuk menampilkan form add-user
 $app->get("/user/add", "UserController:pageFormAddUser");
 
-// 3) mendaftarkan rute submit add user
+// 3) mendaftarkan rute untuk aksi add user
 $app->post("/user/add", "UserController:addUser");
 ```
+
+> Untuk dokumentasi selengkapnya tentang Routing, kamu bisa lihat di official site slim framework [disini](http://docs.slimframework.com/#Routing-Overview)
 
 ### Controller
 Controller adalah sebuah Class yang menyimpan aksi-aksi dari aplikasi kamu, 
