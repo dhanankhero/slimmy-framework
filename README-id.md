@@ -7,7 +7,10 @@ Slimmy (mini) framework adalah framework rakitan yang dibuat dengan dasar [Slim 
 yang dikombinasikan dengan [illuminate/database Laravel](https://github.com/illuminate/database "Illuminate Database") sebagai model
 dan [Twig template engine](http://twig.sensiolabs.org/ "Twig Template Engine") for view.
 
-Slimmy framework dibuat untuk mempermudah membuat Slim project dengan simpel arsitektur (H)MVC.
+Slimmy framework dibuat untuk mempermudah membuat Slim project dengan simpel arsitektur (H)MVC. 
+
+> FYI: Slimmy ini anaknya dari Slim(inheritance Slim\Slim), jadi penggunaannya sama persis dengan Slim framework.
+Framework ini hanya mengintegrasikan Illuminate/datase, Illuminate/Validation dan Twig kedalam simpel (H)MVC arsitekturnya.
 
 ## Fitur
 - **powerful** Eloquent ORM for Models.
