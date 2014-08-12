@@ -9,7 +9,7 @@ dan [Twig template engine](http://twig.sensiolabs.org/ "Twig Template Engine") s
 
 Slimmy framework dibuat untuk mempermudah membuat Slim project dengan simpel arsitektur (H)MVC. 
 
-> FYI: Slimmy ini anaknya dari Slim(inheritance Slim\Slim), jadi penggunaannya sama persis dengan Slim framework.
+> FYI: Slimmy ini anaknya dari Slim(inheritance [Slim\Slim](https://github.com/emsifa/rakit-slimmy/blob/master/src/Rakit/Slimmy/Slimmy.php#L15)), jadi penggunaannya sama persis dengan Slim framework.
 Framework ini hanya mengintegrasikan Illuminate/database, Illuminate/Validation, dan Twig kedalam simpel (H)MVC arsitekturnya.
 
 ## Fitur
