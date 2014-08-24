@@ -9,8 +9,8 @@ dan [Twig template engine](http://twig.sensiolabs.org/ "Twig Template Engine") s
 
 Slimmy framework dibuat untuk mempermudah membuat Slim project dengan simpel arsitektur (H)MVC. 
 
-> FYI: Slimmy ini anaknya dari Slim(inheritance Slim\Slim), jadi penggunaannya sama persis dengan Slim framework.
-Framework ini hanya mengintegrasikan Illuminate/datase, Illuminate/Validation dan Twig kedalam simpel (H)MVC arsitekturnya.
+> FYI: Slimmy ini anaknya dari Slim(inheritance [Slim\Slim](https://github.com/emsifa/rakit-slimmy/blob/master/src/Rakit/Slimmy/Slimmy.php#L15)), jadi penggunaannya sama persis dengan Slim framework.
+Framework ini hanya mengintegrasikan Illuminate/database, Illuminate/Validation, dan Twig kedalam simpel (H)MVC arsitekturnya.
 
 ## Fitur
 Untuk fitur, karena Slimmy ini sebuah mini framework. 
@@ -20,7 +20,7 @@ Jadi hanya mengutamakan beberapa fitur untuk mendukung arsitektur (H)MVCnya, dia
 - **simple** Modular System.
 - **great** Laravel Validator.
 
-> Tapi, hei.. slimmy ini based on composer. Jadi kamu bisa install package(library) apapun yang kamu butuhkan dari ribuan package yang tersedia di packagist!
+> Tapi, hei.. slimmy ini based on composer. Jadi kamu bisa install package(library) apapun yang kamu butuhkan dari ribuan package yang tersedia di packagist! dan jangan ragu untuk mengubah atau membuat sendiri file bootstrap(`app/app.php`) kamu.
 
 ## Instalasi
 Pertama-tama, pastikan kamu sudah menginstal [composer](https://getcomposer.org) di komputer kamu. 
@@ -35,21 +35,38 @@ Setelah composer selesai menginstall dependency, buka `localhost/yourprojectdirn
 
 ## Petunjuk Dasar
 
-### Route
-Route, seperti artinya dia adalah `rute`. Route berfungsi untuk mengatur **apa saja sih** `rute` yang terdapat dalam aplikasi yang akan kamu buat, dan apa metode untuk mengakses masing-masing `rute` tersebut. Untuk itu routing(menjabarkan/mendaftarkan routes) adalah salah 1 yang harus kamu kerjakan pada tahap awal pembuatan aplikasi kamu. 
+### Routing
+Routing berasal dari kata Route, seperti artinya dia adalah `rute`. Routing adalah proses untuk menentukan **apa saja sih** `rute` yang terdapat dalam aplikasi yang akan kamu buat, dan menentukan apa metode untuk mengakses masing-masing `rute` tersebut. Untuk itu routing adalah salah 1 hal yang seharusnya kamu kerjakan pada tahap awal pembuatan aplikasi kamu. 
 
-#### Basic Route
 Untuk mendaftarkan sebuah `rute`, format dasarnya adalah seperti ini
 
-`$app->[request_method]([route], [callable]);`
+`$app->[request_method]([route], [middleware1, middleware2, [action]]);`
 
-**[request_method]**: metode untuk mengakses `rute` tersebut, ada beberapa request method yang perlu kamu ketahui di dalam HTTP, yaitu `get`, `post`, `put`, `patch`, `delete`, `head`. Dari beberapa http method tersebut, yang paling sering terpakai adalah `get`, dan `post`. Sementara yang lainnya biasa dipakai untuk membuat RESTful service.
+**[request_method]** (required) : adalah metode untuk mengakses `rute` tersebut, ada beberapa request method yang perlu kamu ketahui di dalam HTTP, yaitu `get`, `post`, `put`, `patch`, `delete`, `head`. Dari beberapa http method tersebut, yang paling sering terpakai adalah `get`, dan `post`. Sementara yang lainnya biasa dipakai untuk membuat RESTful service.
 
-**[route]**: path dari `rute` tersebut, dalam Slim, path harus diawali dengan '/'. Untuk itu path '/' adalah index aplikasi kamu.
+**[route]** (required) : adalah path dari `rute` tersebut, dalam Slim, path harus diawali dengan '/'. Untuk itu path '/' adalah index aplikasi kamu.
 
-**[callable]**: callable disini bisa berupa Closure(function), string untuk mengakses aksi ke Controller, ataupun string nama function.
+**[middleware]** (optional) : adalah sebuah callable yang akan dipanggil sebelum [action] dijalankan. 
+Middleware dapat berupa string nama sebuah function, dapat juga berupa variable [anonymous function](http://php.net/manual/en/functions.anonymous.php), dan juga dapat berupa Closure.
+Salah 1 kegunaan Route Middleware adalah untuk memfilter user apakah [action] boleh dijalankan atau tidak. 
+Contoh, jika pada rute `/admin`, hanya user yang sudah login yang boleh menjalankan [action] rute tersebut, kamu dapat
+memanfaatkan middleware seperti dibawah ini:
 
-Contoh mendaftarkan route
+```php
+function check_login() {
+ // cek session. Jika user belum login, 
+ // kamu dapat menghentikan aplikasi 
+ // atau kamu dapat melemparnya ke Error 403 (Forbidden Access)
+}
+
+// saat mengakses [site]/admin, route akan menjalankan fungsi check_login 
+// sebelum memanggil aksi AdminController:pageIndex
+$app->get('/admin', 'check_login', 'AdminController:pageIndex');
+```
+
+**[action]** (required) : action disini bisa berupa Closure(function), berupa string untuk mengakses aksi ke Controller, ataupun berupa string nama function.
+
+#### Contoh mendaftarkan route
 ```php
 // app/routes.php
 
@@ -87,7 +104,7 @@ class UserController extends BaseController {
     
 }
 ```
-> **Note & Tips**: setiap aksi di dalam Controller, harus memiliki visibility public (public function) agar dapat dipanggil melalui Route. Jadi kalau mau buat function dimana function tersebut tidak untuk dipanggil melalui Route, buat dalam visibility private atau protected.
+> **Note & Tips**: setiap aksi di dalam Controller, harus memiliki akses public (public function) agar dapat dipanggil melalui Route. Jadi kalau mau buat function dimana function tersebut tidak untuk dipanggil melalui Route(hanya untuk dipanggil di Class itu sendiri untuk mematangkan prinsip [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself)), buat dalam akses private atau protected.
 
 Setelah itu, kamu dapat menjalankan aksi tersebut melalui Route seperti dibawah ini
 ```php
@@ -105,7 +122,7 @@ $app->post("/user/add", "UserController:addUser");
 ### Model
 Model pada dasarnya adalah sebuah Class yang dirancang khusus untuk berinteraksi dengan table di database kamu.
 File model terletak di direktori `app/models`. Sebelumnya, untuk membuat file model kamu berjalan dengan baik, kamu harus
-membuat setidaknya sebuah koneksi database di `app/config/database.php`.
+membuat setidaknya sebuah koneksi database di `app/configs/database.php`.
 
 Misalnya, kamu punya table `users` di database, maka User modelnya akan seperti ini: 
 ```php
@@ -119,8 +136,31 @@ class User extends Model {
     protected $table = 'users';
 
 }
-``` 
-> framework ini menggunakan Eloquent Modelnya Laravel sebagai Model, jadi untuk dokumentasi selengkapnya tentang Eloquent, kamu bisa temukan [disini](http://laravel.com/docs/eloquent)
+```
+Setelah itu, kamu dapat dengan mudah melakukan CRUD pada table `users` tersebut. 
+Dibawah ini adalah contoh dasar operasi CRUD dalam Eloquent ORM:
+```php
+// membuat User baru
+$user = new User;
+$user->username = "johndoe";
+$user->email = "johndoe@mail.com";
+$user->save();
+
+// mengambil data User berdasarkan id
+$user = User::find(1); // 1 = id user yang dicari
+
+// mengupdate data user dengan id = 1
+$user = User::find(1);
+$user->email = "newmail@mail.com";
+$user->save();
+
+// menghapus data user dengan id = 1
+$user = User::find(1);
+$user->delete();
+```
+
+
+> Karena framework ini menggunakan Eloquent Modelnya Laravel sebagai modelnya, jadi untuk dokumentasi selengkapnya tentang Eloquent, kamu bisa temukan [disini](http://laravel.com/docs/eloquent)
 
 ### View
 View adalah sebuah file yang dikhususkan untuk hanya berisi kode-kode HTML, css atau js, dimana dia nantinya akan
@@ -182,6 +222,11 @@ YourModule
 ```
 
 ### Memanggil Aksi di Controller yang terdapat pada Module
+Slimmy menggunakan [autoload PSR-0 composer](https://getcomposer.org/doc/04-schema.md#psr-0) sebagai autoloader modulenya, untuk itu Controller didalam module harus memiliki namespacenya sendiri(defaultnya `App\Modules\[nama_module]\Controllers`). Jadi untuk mengakses aksi
+pada Controller tersebut, kamu harus menambahkan @[nama_module] sebagai shortcut namespacingnya.
+
+Contoh
+
 ```php
 // app/routes.php
 
