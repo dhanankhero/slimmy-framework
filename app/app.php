@@ -27,7 +27,7 @@ if(!empty($hooks)) {
 
 // registering facades and aliasing classes
 $facades = $app->config('aliases');
-if(!empty($aliases)) {
+if(!empty($facades)) {
 	Facade::setFacadeApplication($app);
 	Facade::registerAliases($facades);
 }

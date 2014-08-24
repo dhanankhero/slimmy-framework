@@ -51,7 +51,7 @@ Untuk mendaftarkan sebuah `rute`, format dasarnya adalah seperti ini
 
 Contoh mendaftarkan route
 ```php
-// public/index.php
+// app/routes.php
 
 // 1) mendaftarkan rute index, cukup dengan '/'
 $app->get("/", "YourController:pageIndex");
@@ -91,7 +91,7 @@ class UserController extends BaseController {
 
 Setelah itu, kamu dapat menjalankan aksi tersebut melalui Route seperti dibawah ini
 ```php
-// public/index.php
+// app/routes.php
 
 // memanggil UserController->pageManageUser 
 // ketika user membuka [site]/index.php/user/manage
@@ -147,7 +147,7 @@ class UserController extends BaseController {
 
 Merender sebuah view melalui Closure(function) di Route
 ```php
-// public/index.php
+// app/routes.php
 
 // example rendering 'app/views/manage-users.twig' via Route Closure
 $app->get("/users/manage", function() use ($app) {
@@ -170,23 +170,20 @@ aplikasi dari aplikasi slimmy yang 1 ke aplikasi slimmy yang lain.
 ### Struktur Direktori Module
 Struktur direktori dari sebuah module, pada dasarnya adalah seperti ini
 ```
-yourmodule
-    |- controllers
-    |   |- YourModuleController.php
-    |
-    |- models
-    |   |- YourModuleModel.php
-    |
-    |- views
-    |   |- your-module-view.twig
-    |
-    |- migrators
-    |   |- YourModuleMigrator.php
+YourModule
+    ├── controllers
+    │    └─ YourModuleController.php
+    │
+    ├── models
+    │    └─ YourModuleModel.php
+    │
+    └── views
+         └─ your-module-view.twig
 ```
 
 ### Memanggil Aksi di Controller yang terdapat pada Module
 ```php
-// public/index.php
+// app/routes.php
 
 $app->get("/your-route", "@YourModuleName/YourModuleController:methodName");
 ```
