@@ -9,7 +9,7 @@
     "license": "MIT",
     "autoload": {
         "psr-0": {
-            "": ["app/models", "app/controllers", "app/libraries"],
+            "": ["App/Models", "App/Controllers", "App/Libraries"],
             "App": ""
         }
     }

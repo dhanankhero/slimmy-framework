@@ -7,7 +7,7 @@ use Rakit\Slimmy\Slimmy;
 use SlimFacades\Facade;
 
 // load configurations
-$configs = require(__DIR__."/configs/app.php");
+$configs = require(__DIR__."/Configs/app.php");
 
 // defining constants
 define('APP_PATH', $configs['path.app']);
@@ -19,7 +19,7 @@ $app = new Slimmy($configs);
 
 $hooks = $app->config('hooks');
 if(!empty($hooks)) {
-	$hooks_dir = APP_PATH.'/hooks';
+	$hooks_dir = APP_PATH.'/Hooks';
 	foreach($hooks as $hookfile) {
 		include($hooks_dir.'/'.$hookfile);
 	}

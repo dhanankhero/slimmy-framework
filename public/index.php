@@ -1,7 +1,7 @@
 <?php
 
 // initialize application from bootstrap file
-$app = require("../app/app.php");
+$app = require("../App/app.php");
 
 require(APP_PATH."/routes.php");
 

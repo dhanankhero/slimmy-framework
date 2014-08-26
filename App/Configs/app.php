@@ -9,10 +9,10 @@ return array(
 	'path.public' => dirname(dirname(__DIR__))."/public",
 
 	// path for view files (from app.path)
-	'view.base_path' => 'views',
+	'view.base_path' => 'Views',
 
 	// module paths
-	'module.path' => dirname(__DIR__)."/modules",
+	'module.path' => dirname(__DIR__)."/Modules",
 
 	// base namespace for module
 	'module.namespace' => 'App\Modules',
