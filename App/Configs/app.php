@@ -9,7 +9,7 @@ return array(
 	'path.public' => dirname(dirname(__DIR__))."/public",
 
 	// path for view files (from app.path)
-	'view.base_path' => 'Views',
+	'view.directory' => 'Views',
 
 	// module paths
 	'module.path' => dirname(__DIR__)."/Modules",
@@ -45,6 +45,10 @@ return array(
 	'hooks' => require(__DIR__.'/hooks.php'),
 
 	'database.default_connection' => 'default',
-	'database.connections' => require(__DIR__.'/database.php')
+	'database.connections' => require(__DIR__.'/database.php'),
+
+	'migration.table' => 'migrations',
+	'migration.directory' => 'Migrations',
+	'migration.enabled' => true,
 
 );

@@ -33,7 +33,7 @@ Pertama-tama, pastikan kamu sudah menginstal [composer](https://getcomposer.org)
 
 Setelah composer selesai menginstall dependency, buka `localhost/yourprojectdirname/public` di browser kamu.
 
-## Petunjuk Dasar
+## Pengetahuan Dasar
 
 ### Routing
 Routing berasal dari kata Route, seperti artinya dia adalah `rute`. Routing adalah proses untuk menentukan **apa saja sih** `rute` yang terdapat dalam aplikasi yang akan kamu buat, dan menentukan apa metode untuk mengakses masing-masing `rute` tersebut. Untuk itu routing adalah salah 1 hal yang seharusnya kamu kerjakan pada tahap awal pembuatan aplikasi kamu. 
@@ -200,7 +200,7 @@ $app->get("/users/manage", function() use ($app) {
 ```
 > Untuk dokumentasi penggunaan twig, kamu dapat langsung lihat di official site twig [disini](http://twig.sensiolabs.org/doc/templates.html)
 
-## Working with module
+## Bermain Dengan Module
 Module adalah sebuah direktori yang memiliki file `controllers`, `models`, dan `views`nya sendiri. 
 Module digunakan jika kamu ingin berkolaborasi dengan tim pengembangan kamu, misalnya si A fokus mengerjakan bagian `User`, si B fokus mengerjakan bagian `Post`, dsb. Dan dia juga berguna untuk mempermudah dalam memindahkan bagian
 aplikasi dari aplikasi slimmy yang 1 ke aplikasi slimmy yang lain.
@@ -243,9 +243,103 @@ Contoh, jika kamu ingin merender `form-edit-user.twig` yang berada di dalam modu
 $this->app->render("@User/form-edit-user.twig", $data);
 ```
 
+## Migrasi
+Migrasi adalah sebuah fitur yang memungkinkan kamu mengontrol versi dari skema database aplikasi kamu. 
+
+#### File Migrasi
+File migrasi pada dasarnya terletak di `App/Migrations`. Karena Slimmy memanfaatkan migrator dan skema builder pada `Illuminate/Database`, jadi ada beberapa peraturan penamaan file dan class pada file migrasi. 
+
+Untuk penamaan file, formatnya adalah sebagai berikut:
+```
+yyyy_mm_dd_hhiiss_nama_class.php
+```
+`yyyy` adalah tahun, `mm` adalah nomor bulan, `dd` adalah tanggal, `hhiiss` adalah jam, menit, dan detik, sedangkan `nama_class` adalah nama class migrasi kamu. Penamaan dengan format tersebut digunakan untuk memudahkan kamu mengenali kapan file migrasi itu dibuat.
+
+Contoh untuk penamaan file migrasi untuk membuat table user
+```
+2014_08_12_114527_create_table_user.php
+```
+
+Perlu diperhatikan, pada bagian `create_table_user` itu mempengaruhi nama Class yang harus kalian gunakan di dalam file migrasi tersebut. Jika pada nama file menggunakan `create_table_user`, maka nama Class yang harus digunakan pada file migrasi tersebut adalah `CreateTableUser` (hilangkan underscore, dan gunakan studly case).
+
+Pada file migrasi, ada 2 method yang **harus** digunakan, yaitu `up()` dan `down()`. Method `up()` digunakan apabila file migrasi dijalankan, sedangkan method `down()` digunakan apabila migrasi di *rollback*.
+
+
+Contoh file migrasi `2014_08_12_114527_create_table_user.php`
+```php
+<?php
+// isi dari Migrations/2014_08_12_114527_create_table_user.php
+
+use Rakit\Slimmy\Migration
+
+class CreateUserTable extends Migration {
+
+    public function up()
+    {
+        $this->schema->create('users', function($table) {
+             $table->increments('id');
+             $table->string('username', 20)->unique();
+             $table->string('password');
+             $table->string('name');
+             $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        $this->schema->dropIfExists('users');
+    }
+
+}
+```
+
+Pada script diatas, method `up()` akan membuat sebuah table bernama `users`. Sedangkan `down()` sebaliknya, dia akan menghapus table `users` tersebut. `$this->schema` pada contoh migrasi diatas adalah skema builder dari `Illuminate/Database` Laravel. Jadi untuk mempelajari skema builder, kamu dapat langsung melihat dokumentasinya [disini](http://laravel.com/docs/schema).
+
+#### Menjalankan Migrasi
+
+> Agar dapat menjalankan migrasi, sebelumnya pastikan pada `App/Configs/app.php` konfigurasi untuk `migration.enabled` bernilai `TRUE` dan juga pastikan kamu membuat sebuat koneksi database di `App/Configs/database.php`
+
+Untuk menjalankan migrasi secara manual, kamu dapat memanfaatkan sebuah Route dan gunakan perintah `$app->migrator->run()`, dimana `$app` adalah aplikasi Slimmy kamu.
+
+Contoh menjalankan migrasi menggunakan Route
+```php
+$app->get('/migration/migrate', function() use ($app) {
+    $app->migrator->run();
+});
+```
+
+Untuk menjalankan migrasi tersebut, di browser, buka url
+```
+localhost/[yourapp]/public/index.php/migration/migrate
+```
+Setelah itu coba perhatikan di database, seharusnya akan muncul table bernama `migrations` yang mencatat riwayat migrasi kamu. Apabila file migrasi kamu terdaftar disana, itu tandanya migrasi kamu berhasil.
+
+> Jika kamu mau menggunakan nama table selain `migrations`, kamu dapat menggantinya melalui konfigurasi `migration.table` 
+
+#### Rollback
+Rollback digunakan untuk mengembalikan skema database kamu 1 step ke versi sebelumnya. Apabila kamu perhatikan, di table `migrations` yang terbentuk setelah migrasi dijalankan, ada sebuah kolom bernama `batch` bertipe *integer*. Kolom tersebut adalah penanda versi migrasi kamu. Jadi saat me-rollback, *migrator* akan mencari nilai terakhir dari `batch`. Dan selanjutnya migrator akan menjalankan method `down()` pada file-file di `batch` terakhir tersebut.
+
+Untuk menggunakan rollback, kamu dapat gunakan `$app->migrator->rollback()`
+
+Contoh menggunakan rollback melalui Route
+```php
+$app->get('/migration/rollback', function() use ($app) {
+    $app->migrator->rollback();
+});
+```
+Setelah itu, untuk me-rollback, gunakan url
+```
+localhost/[yourapp]/public/index.php/migration/rollback
+```
+
+#### Cara lebih praktis? kayak Laravel gituloh, tinggal mainin terminal
+Kalo yang 1 itu sedang saya buat. Jadi ditunggu aja yah :D
+
+
 ## More from official documentation
 - Routing: [http://docs.slimframework.com/#Routing-Overview](http://docs.slimframework.com/#Routing-Overview)
 - Rendering a view: [http://docs.slimframework.com/#Rendering](http://docs.slimframework.com/#Rendering)
 - Twig for view: [http://twig.sensiolabs.org/](http://twig.sensiolabs.org/)
 - Eloquent Model: [http://laravel.com/docs/eloquent](http://laravel.com/docs/eloquent)
 - Validation: [http://laravel.com/docs/validation](http://laravel.com/docs/validation)
+- Schema Builder: [http://laravel.com/docs/schema](http://laravel.com/docs/schema)
