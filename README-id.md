@@ -270,7 +270,7 @@ Contoh file migrasi `2014_08_12_114527_create_table_user.php`
 <?php
 // isi dari Migrations/2014_08_12_114527_create_table_user.php
 
-use Rakit\Slimmy\Migration
+use Rakit\Slimmy\Migration;
 
 class CreateUserTable extends Migration {
 
